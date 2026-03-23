@@ -7,6 +7,8 @@ import { UtilService } from 'src/app/services/util/util.service';
     styleUrls: ['./copyright.component.scss'],
 })
 export class CopyrightComponent implements OnInit {
+    readonly year = new Date().getFullYear();
+
     constructor(private util: UtilService) {}
 
     ngOnInit(): void {}

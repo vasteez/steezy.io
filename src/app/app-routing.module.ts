@@ -49,20 +49,6 @@ const appRoutes: Routes = [
                         (m) => m.ReviewsModule
                     ),
             },
-            {
-                path: 'blogs',
-                loadChildren: () =>
-                    import('./pages/blogs/blogs.module').then(
-                        (m) => m.BlogsModule
-                    ),
-            },
-            {
-                path: 'blog/:slug',
-                loadChildren: () =>
-                    import('./pages/blogs/blog/blog.module').then(
-                        (m) => m.BlogModule
-                    ),
-            },
         ],
     },
 
