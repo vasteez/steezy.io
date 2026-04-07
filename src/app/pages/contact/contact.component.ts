@@ -33,6 +33,7 @@ export class ContactComponent implements OnInit {
             environment.apiBase +
             '/wp-json/contact-form-7/v1/contact-forms/22/feedback';
         const formData = new FormData();
+        formData.append('_wpcf7_unit_tag', 'wpcf7-f22-o1');
         formData.append('firstName', formValues.firstName);
         formData.append('lastName', formValues.lastName);
         formData.append('email', formValues.email);
@@ -40,19 +41,23 @@ export class ContactComponent implements OnInit {
         formData.append('description', formValues.description);
         formData.append('selectFile', this.fileToUpload);
 
-        console.log('FormData -> ', formData);
-        this.http.post(url, formData).subscribe((res: any) => {
-            if (res.status == 'mail_sent') {
-                this.showSuccessMessage = true;
-                this.showErrorMessage = false;
-                form.reset();
-            } else {
+        this.http.post(url, formData).subscribe({
+            next: (res: any) => {
+                if (res.status == 'mail_sent') {
+                    this.showSuccessMessage = true;
+                    this.showErrorMessage = false;
+                    form.reset();
+                } else {
+                    this.showErrorMessage = true;
+                    this.showSuccessMessage = false;
+                }
+                this.submitSpinner = false;
+            },
+            error: () => {
                 this.showErrorMessage = true;
                 this.showSuccessMessage = false;
-            }
-            this.submitSpinner = false;
-
-            console.log(res);
+                this.submitSpinner = false;
+            },
         });
     }
 
