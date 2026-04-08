@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiBase: 'https://headless.steezapp.com',
+    apiBase: 'https://backend.steezapp.com',
 };
 
 /*
